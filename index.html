@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://d3js.org/queue.v1.min.js"></script>
+<script src="https://d3js.org/topojson.v1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
+<script src="d3-tip.js"></script>
+
+<body>
+  <h3 class='title'>GLOBAL WARMING INFOGRAPHICS</h3>
+  <div class="container-fluid page-wrapper">
+    <div class="row dashboard-height">
+      <div class="col-sm-3 col-12 left-panel" id='leftish'>
+        <svg id="rainfall"></svg>
+        <svg id="info-wrapper"></svg>
+        <!-- <div class='info-wrapper'> -->
+        <!-- <h5>How alarming is global warming?</h5>
+          <ul>
+            <li><a href="https://www.vox.com/energy-and-environment/2018/1/19/16908402/global-warming-2-degrees-climate-change" target="_blank">Scientists predict that 2 degrees of global warming will be way worse than 1.5!</a></li>
+            <li><a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)32290-X/fulltext" target="_blank">As per The LANCET, climate suitability for infectious disease transmission has been growing rapidly since 1950s.</a></li>
+            <li><a href="https://www.climatecentral.org/" target="_blank">Scientists project that extreme weather events like heat waves, droughts, blizzards and rainstorms will continue to occur more often and with greater intensity.</a></li>
+            <li><a href="https://www.livescience.com/37057-global-warming-effects.html" target="_blank">Global sea levels have risen about 8 inches since 1870 and with the current trends, many coastal areas, where roughly half of the human population lives, will be inundated.</a></li>
+            <li><a href="https://www.nature.com/articles/nclimate1887" target="_blank">As per 2013 report in the Nature Climate Change journal, global warming will likely contribute to the disappearance of up to one-half of Earth's plants and one-third of animals from their current range by 2080</a></li>
+          </ul> -->
+        <!-- </div> -->
+      </div>
+      <div class="col-sm-6 col-12 map-panel">
+        <div class='map-wrapper'></div>
+        <div class='slider-wrapper'>
+          <h4>Slide to Year</h4>
+          <input class='slider' type="range" min="1991" max="2016" value="1991" step="1" name="mySlider" id=mySlider>
+          <div class="sliderticks">
+            <p>1991</p>
+            <p>1992</p>
+            <p>1993</p>
+            <p>1994</p>
+            <p>1995</p>
+            <p>1996</p>
+            <p>1997</p>
+            <p>1998</p>
+            <p>1999</p>
+            <p>2000</p>
+            <p>2001</p>
+            <p>2002</p>
+            <p>2003</p>
+            <p>2004</p>
+            <p>2005</p>
+            <p>2006</p>
+            <p>2007</p>
+            <p>2008</p>
+            <p>2009</p>
+            <p>2010</p>
+            <p>2011</p>
+            <p>2012</p>
+            <p>2013</p>
+            <p>2014</p>
+            <p>2015</p>
+            <p>2016</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-3 right-panel">
+        <svg id="vis1" width="100%" ; height="47%"></svg>
+        <svg id="vis2" width="100%" ; height="47%"></svg>
+      </div>
+    </div>
+  </div>
+</body>
+<script type="text/javascript"></script>
+<script src="app.js"></script>
+
+</html>

@@ -1,0 +1,268 @@
+html,
+body {
+  font-family: sans-serif;
+  font-size: 12px;
+  background: linen;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page-wrapper {
+  position: relative;
+}
+
+.left-panel {
+  /*margin-top: 20px;*/
+}
+
+.right-panel {
+  /*background: cyan;*/
+}
+
+.map-panel {
+  /*background: orange;*/
+}
+
+.dashboard-height {
+  height: 100vh;
+}
+
+.auto-width {
+  width: 100%;
+}
+
+.map-wrapper {
+  /*height: 84vh;*/
+}
+
+.title {
+  text-align: center;
+  padding-bottom: 0 !important;
+
+}
+
+.countries {
+  margin-left: 20px;
+}
+
+.names {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+}
+
+.slider-wrapper {
+  margin-top: 20px;
+}
+
+.rainfall_bar {
+  fill: #17a2b8;
+  opacity: 0.6;
+}
+
+.rainfall_bar:hover {
+  /*fill: orangered;*/
+  opacity: 0.9;
+}
+
+.axis {
+  /*font-weight: 600;*/
+}
+
+.axis-label {
+  font-weight: 600;
+  text-anchor: middle
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 18px;
+  background: #D3D3D3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  border-radius: 25px;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 30px;
+  background: brown;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  background: brown;
+  cursor: pointer;
+}
+
+.sliderticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.sliderticks p {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 2px;
+  background: #D3D3D3;
+  height: 0px;
+  font-size: 11px;
+  font-weight: 600;
+  padding-top: 7px;
+}
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+
+
+/* Tooltip CSS */
+/* .d3-tip {
+    line-height: 1.5;
+    font-weight: 400;
+    font-family: "avenir next", Arial, sans-serif;
+    padding: 6px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #FFA500;
+    border-radius: 1px;
+    pointer-events: none;
+  }*/
+
+/* Creates a small triangle extender for the tooltip */
+/*  .d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 8px;
+    width: 100%;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    pointer-events: none;
+
+  }*/
+
+/* Northward tooltips */
+/*  .d3-tip.n:after {
+    content: "\25BC";
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+    text-align: center;
+  }*/
+
+/* Eastward tooltips */
+/*  .d3-tip.e:after {
+    content: "\25C0";
+    margin: -4px 0 0 0;
+    top: 50%;
+    left: -8px;
+  }*/
+
+/* Southward tooltips */
+/*  .d3-tip.s:after {
+    content: "\25B2";
+    margin: 0 0 1px 0;
+    top: -8px;
+    left: 0;
+    text-align: center;
+  }*/
+
+/* Westward tooltips */
+/*.d3-tip.w:after {
+    content: "\25B6";
+    margin: -4px 0 0 -1px;
+    top: 50%;
+    left: 100%;
+  }
+
+  .details {
+    color: white;
+  }*/
+
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+.info-wrapper {
+  margin-top: 9px;
+
+}
+
+.info-wrapper h5 {
+  padding-left: 9px;
+  font-weight: bold;
+
+}
+
+.info-wrapper ul {
+  padding-left: 18px !important;
+
+}
+
+.info-wrapper ul li {
+  text-align: justify;
+}
+
+/**/
+/*for mobile*/
+/*@media (min-width: @screen-sm-min) {*/
+@media only screen and (max-width: 768px) {
+
+  .dashboard-height {
+    height: auto;
+    overflow: auto
+  }
+
+  .slider-wrapper {
+    position: fixed;
+    bottom: 30px;
+    width: 94%;
+  }
+
+  .sliderticks p {
+    font-size: 8px;
+  }
+
+}
