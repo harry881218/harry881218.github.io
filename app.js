@@ -95,7 +95,7 @@ d3.json('./data/country_id_map.json', function(data) {
     .attr("text-anchor", "middle")
     .style("font-size", "14px")
     .style("text-decoration", "underline")
-    .text("Distribution of Highest Rainfall in " + country_id_map[selected_country] + ' from 1991-2016');
+    .text("Highest Rainfall in " + country_id_map[selected_country] + ' from 1991-2016');
 
   rain_cum_g.append("text") // text label for the y axis
     .attr("transform", "rotate(-90)")
@@ -132,45 +132,52 @@ var rainfallDataProcessing = function(isUpdate) {
         return d
       }
     })
-    cum_year_filterData = {}
-    country_filterData.forEach(function(d) {
-      if (!cum_year_filterData[d.Year]) {
-        cum_year_filterData[d.Year] = d
+    if (country_filterData.length > 0) {
+
+
+      cum_year_filterData = {}
+      country_filterData.forEach(function(d) {
+        if (!cum_year_filterData[d.Year]) {
+          cum_year_filterData[d.Year] = d
+        } else {
+          cum_year_filterData[d.Year] = parseInt(d.Rainfall) > parseInt(cum_year_filterData[d.Year].Rainfall) ? d : cum_year_filterData[d.Year]
+        }
+      })
+      cum_year_filterData = Object.values(cum_year_filterData)
+
+      var filterData = country_filterData.filter(function(d) {
+        if (d['Year'] == yearOfView) {
+          return d
+        }
+      })
+
+      rainfallStats = filterData
+
+      rain_x.domain(filterData.map(function(d, i) {
+        return d.Statistics;
+      }));
+      rain_cum_x.domain(cum_year_filterData.map(function(d, i) {
+        return d.Year;
+      }));
+
+      if (isUpdate) {
+        rain_title.text("Rainfall Distribution in year " + yearOfView + " in " + country_id_map[selected_country]);
+        rain_cum_title.text("Highest Rainfall in " + country_id_map[selected_country] + " from 1991-2016");
+
+        updateBarChart(filterData)
+        updateLineChart(cum_year_filterData)
       } else {
-        cum_year_filterData[d.Year] = parseInt(d.Rainfall) > parseInt(cum_year_filterData[d.Year].Rainfall) ? d : cum_year_filterData[d.Year]
+        rain_y.domain([0, d3.max(filterData, function(d, i) {
+          return parseFloat(d.Rainfall);
+        })]);
+
+        rain_cum_y.domain([0, d3.max(cum_year_filterData, function(d, i) {
+          return parseFloat(d.Rainfall);
+        })]);
+
+        drawBarChart(filterData)
+        drawLineChart(cum_year_filterData)
       }
-    })
-    cum_year_filterData = Object.values(cum_year_filterData)
-
-    var filterData = country_filterData.filter(function(d) {
-      if (d['Year'] == yearOfView) {
-        return d
-      }
-    })
-
-    rainfallStats = filterData
-
-    rain_x.domain(filterData.map(function(d, i) {
-      return d.Statistics;
-    }));
-    rain_cum_x.domain(cum_year_filterData.map(function(d, i) {
-      return d.Year;
-    }));
-
-    if (isUpdate) {
-      updateBarChart(filterData)
-      updateLineChart(cum_year_filterData)
-    } else {
-      rain_y.domain([0, d3.max(filterData, function(d, i) {
-        return parseFloat(d.Rainfall);
-      })]);
-
-      rain_cum_y.domain([0, d3.max(cum_year_filterData, function(d, i) {
-        return parseFloat(d.Rainfall);
-      })]);
-
-      drawBarChart(filterData)
-      drawLineChart(cum_year_filterData)
     }
   })
 };
@@ -252,23 +259,6 @@ function drawLineChart(cr_data) {
     .attr("r", 3)
     .on("mouseover", rain_cum_tooltip.show)
     .on("mouseout", rain_cum_tooltip.hide)
-  // .on("mouseover", function(d) {
-  //   div.transition()
-  //     .duration(200)
-  //     .style("opacity", .9);
-  //   div.html((d.Year) + ":" + d.frequency)
-  //     .style("left", (d3.event.pageX) + "px")
-  //     .style("top", (d3.event.pageY - 28) + "px");
-  // })
-  // .on("mouseout", function(d) {
-  //   div.transition()
-  //     .duration(500)
-  //     .style("opacity", 0);
-  // });
-  // rain_cum_g.selectAll('rect')
-  //   .on("mouseover", rain_cum_tooltip.show)
-  //   .on("mouseout", rain_cum_tooltip.hide)
-
 }
 
 rainfallDataProcessing(false)
@@ -454,8 +444,6 @@ function ready(error, data, temperature) {
     })
     .on('click', function(d) {
       selected_country = d['id']
-      rain_title.text("Rainfall Distribution in year " + yearOfView + " in " + country_id_map[selected_country]);
-      rain_cum_title.text("Distribution of Highest Rainfall in " + country_id_map[selected_country] + " from 1991-2016");
       rainfallDataProcessing(true)
 
     })
@@ -518,7 +506,7 @@ g_sea.append("text")
 
 // Heading
 g_sea.append("text")
-  .attr("x", width-10)
+  .attr("x", width - 10)
   .attr("y", -10)
   .attr("dy", "0.71em")
   .attr("text-anchor", "end") // attribute: start, middle, end
@@ -603,7 +591,7 @@ svg_co2.append("text")
 
 // Heading
 svg_co2.append("text")
-  .attr("x", width-10)
+  .attr("x", width - 10)
   .attr("y", -10)
   .attr("dy", "0.71em")
   .attr("text-anchor", "end") // attribute: start, middle, end
